@@ -1,0 +1,2 @@
+destination: ./public
+exclude: Gemfile, Gemfile.lock, .rvmrc
