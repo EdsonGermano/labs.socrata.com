@@ -1,0 +1,3 @@
+[submodule "labs-common"]
+	path = labs-common
+	url = https://github.com/socrata/labs-common.git
