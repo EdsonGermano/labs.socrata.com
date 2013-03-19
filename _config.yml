@@ -1,6 +1,8 @@
 destination: ./public
 include: common
 exclude: Gemfile, Gemfile.lock, .rvmrc, labs-common
+permalink: /blog/:year/:month/:day/:title/
 
+# Custom Local Config
 ga_tracking_code: "UA-9046230-6"
 subsite: labs
