@@ -1,10 +1,16 @@
-destination: ./public
-include: common
-exclude: Gemfile, Gemfile.lock, .rvmrc, labs-common
-permalink: /blog/:year/:month/:day/:title/
+destination: public
+exclude: [Makefile, Gemfile, Gemfile.lock, .rvmrc, public, sample-code]
 
 # Custom Local Config
 ga_tracking_code: "UA-9046230-6"
 subsite: labs
 subsite_name: Socrata Labs
-github_repo: "https://github.com/socrata/labs.socrata.com"
+github_repo: https://github.com/socrata/labs.socrata.com
+
+title: Socrata Labs
+icon: fa fa-flask
+
+gems:
+  - jekyll-redirect-from
+  - jekyll-sitemap
+  - jekyll-mentions
