@@ -1,5 +1,5 @@
 destination: public
-exclude: [Makefile, Gemfile, Gemfile.lock, .rvmrc, public, sample-code]
+exclude: [Makefile, Gemfile, Gemfile.lock, .rvmrc, public, sample-code, _blueprint, Rakefile]
 
 # Custom Local Config
 ga_tracking_code: "UA-9046230-6"
