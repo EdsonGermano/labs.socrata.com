@@ -1,3 +1,14 @@
 <li>
   <a href="http://dev.socrata.com"><i class="fa fa-fw fa-code"></i>SODA Developers</a>
-</li> 
+</li>
+
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-thumbs-o-up"></i> Labs APIs <i class="fa fa-caret-down"></i></a>
+  <ul class="dropdown-menu">
+  {% for page in site.pages %}
+    {% if page.type == 'api' %}
+      <li><a href="{{ page.url }}"><i class="{{ page.icon }}"></i> {{ page.title }}</a></li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+</li>

@@ -24,6 +24,9 @@ task :build_apis do
 ---
 layout: default
 title: #{config["name"]}
+version: #{config["version"]}
+type: api
+icon: #{config["icon"]}
 custom_css:
 - /css/aglio.css
 ---
