@@ -1,0 +1,6 @@
+search:
+  name: Catalog Search API
+  blueprint: "https://raw.githubusercontent.com/socrata/cetera/master/apiary.apib?token=AABOA2XUwZmg35sxvsErUlmYlOb8UP62ks5VOTciwA%3D%3D"
+export:
+  name: Export API
+  blueprint: "https://raw.githubusercontent.com/socrata/export-service/master/apiary.apib?token=AABOA5fsTUSQnCQLcfGabb8TILl9GEzNks5VOWRYwA%3D%3D"
