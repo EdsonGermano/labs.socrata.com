@@ -1,0 +1,529 @@
+---
+layout: default
+title: Catalog Search API
+custom_css:
+- /css/aglio.css
+---
+<div class="container-fluid content"><div class="row with-sidebar"><div class="col-md-3 hidden-phone"><nav id="nav" class="hidden-sm hidden-xs nav"><div class="list-group"><a data-toggle="" data-target="#-menu" href="#" class="list-group-item heading collapsed">Resource Group</a><div id="-menu"><a href="#-search-endpoint" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item">Search Endpoint</a><a href="#-searching-particular-domains" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching particular domains</a><a href="#-searching-particular-categories" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching particular categories</a><a href="#-full-text-search" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Full text search</a><a href="#-pagination" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Pagination</a><a href="#-limiting-results-to-specific-resource-types" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Limiting results to specific resource types</a><a href="#-including-additional-render-metadata" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Including additional render metadata</a><a href="#-complete-search-api" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Complete Search API</a><a href="#-listing-domains" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Listing Domains</a><a href="#-searching-for-tags" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching for tags</a><a href="#-searching-for-categories" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching for categories</a></div></div></nav></div><div class="col-md-9"><div><header><div class="page-header"><h1 id="top">API Documentation</h1></div></header><div class="description"><h1 id="cetera-search-service">Cetera — Search Service</h1>
+<p>Features may not be implemented yet (such as the <code>highlight</code> option); however, we wish to future proof the API against version changes.
+The flag <code>include_internal_metadata</code> should be set to <code>true</code> for the frontend, although its presence (or lack of presence) may be ignored for now.
+Once we understand the behavior for the civic hacker, we will optimize the use case to return the appropriate, less verbose payload.
+Given that our internal resource names will change, we will require external documentation that shares the resource that a civic hacker can use to load a dataset or page from its id.</p>
+<p>All calls will return a JSON object containing the list of datasets and pages in the relevance that is appropriate to the query in a field called <code>results</code>. This <code>results</code> array contains an array of hashes. Each hash contains a key <code>resource</code> containing the resource to be returned. Hashes may contain additional fields to <code>resource</code> including metadata about the resource, such as the <code>classification</code> object. Each resource will be either a page or a dataset.</p>
+<p>Pages and datasets may be distinguished by the <code>type</code> field. This is set to <code>dataset</code> for datasets and to <code>page</code> for pages. Additionally, the bodies differ from each other as follows:</p>
+<ul>
+<li>Pages include the fields <code>pageId</code>, <code>datasetId</code>, and <code>cards</code>,</li>
+<li>Datasets include the fields <code>id</code> and <code>columns</code>.</li>
+</ul>
+<p>With the exception of the additional <code>type</code> field, the objects in the <code>resources</code> field are unaltered from their representation in whatever owns their truth.</p>
+<p><em>Please note that we assume that all calls include either the <code>X-App-Token</code> header or the <code>$$app_token</code> parameters set to a valid token. This is assumed and not documented in the API spec below.</em></p>
+</div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="">Resource Group&nbsp;<a href="#"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><h4 id="-search-endpoint">Search Endpoint&nbsp;<a href="#-search-endpoint"><i class="fa fa-link"></i></a></h4><h4 id="-searching-particular-domains">Searching particular domains&nbsp;<a href="#-searching-particular-domains"><i class="fa fa-link"></i></a></h4><p>When no <code>domain</code> parameter is passed, the search service returns results from the entire corpus.</p>
+<section id="-searching-particular-domains-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Domain Search API</span></div><div style="float:left"><a href="#-searching-particular-domains-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?domains}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#630fcac4e3e69d452bf00dc87f62ff10" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="630fcac4e3e69d452bf00dc87f62ff10" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+      "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
+        {
+          "<span class="hljs-attribute">classification</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">tags</span>":<span class="hljs-value">[<span class="hljs-string">"tag1"</span>, <span class="hljs-string">"tag2"</span>]</span>,
+            "<span class="hljs-attribute">category</span>":<span class="hljs-value"><span class="hljs-string">"Public Health"</span>
+          </span>}</span>,
+
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
+            "<span class="hljs-attribute">columns</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">location_state</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A location (state)"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Location (state)"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">15</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"City for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"CITY"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">zipcode</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">23</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"5 digit postal Zip Code for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"ZIPCODE"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+              </span>}
+            </span>}</span>,
+            "<span class="hljs-attribute">defaultPage</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"moco-migrationtest.demo.socrata.com"</span></span>,
+            "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">locale</span>": <span class="hljs-value"><span class="hljs-string">"en_US"</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">ownerId</span>": <span class="hljs-value"><span class="hljs-string">"h6pt-apgn"</span></span>,
+            "<span class="hljs-attribute">rowDisplayUnit</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+            "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value"><span class="hljs-string">"2015-01-06T16:59:37.000-08:00"</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>},
+        {
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"page"</span></span>,
+            "<span class="hljs-attribute">cards</span>": <span class="hljs-value">[
+              {
+                "<span class="hljs-attribute">appliedFilters</span>": <span class="hljs-value">[]</span>,
+                "<span class="hljs-attribute">cardSize</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+                "<span class="hljs-attribute">cardType</span>": <span class="hljs-value"><span class="hljs-string">"Column"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Supervisor district"</span></span>,
+                "<span class="hljs-attribute">expanded</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+                "<span class="hljs-attribute">fieldName</span>": <span class="hljs-value"><span class="hljs-string">":@computed_region_p3v4_2swa"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"District"</span>
+             </span>}
+            ]</span>,
+            "<span class="hljs-attribute">datasetId</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">pageId</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">primaryAmountField</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">primaryAggregation</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>}
+      ]
+    </span>}
+</code></pre></li></ul></section><h4 id="-searching-particular-categories">Searching particular categories&nbsp;<a href="#-searching-particular-categories"><i class="fa fa-link"></i></a></h4><p>When no <code>categories</code> parameter is passed, the search service returns results from the entire set of categories.</p>
+<section id="-searching-particular-categories-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Category Search API</span></div><div style="float:left"><a href="#-searching-particular-categories-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?categories}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#08fe8a0d88b88cde76207249be532285" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="08fe8a0d88b88cde76207249be532285" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+      "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
+        {
+          "<span class="hljs-attribute">classification</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">tags</span>":<span class="hljs-value">[<span class="hljs-string">"tag1"</span>, <span class="hljs-string">"tag2"</span>]</span>,
+            "<span class="hljs-attribute">category</span>":<span class="hljs-value"><span class="hljs-string">"Public Health"</span>
+          </span>}</span>,
+
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
+            "<span class="hljs-attribute">columns</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">location_state</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A location (state)"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Location (state)"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">15</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"City for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"CITY"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">zipcode</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">23</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"5 digit postal Zip Code for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"ZIPCODE"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+              </span>}
+            </span>}</span>,
+            "<span class="hljs-attribute">defaultPage</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"moco-migrationtest.demo.socrata.com"</span></span>,
+            "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">locale</span>": <span class="hljs-value"><span class="hljs-string">"en_US"</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">ownerId</span>": <span class="hljs-value"><span class="hljs-string">"h6pt-apgn"</span></span>,
+            "<span class="hljs-attribute">rowDisplayUnit</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+            "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value"><span class="hljs-string">"2015-01-06T16:59:37.000-08:00"</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>},
+        {
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"page"</span></span>,
+            "<span class="hljs-attribute">cards</span>": <span class="hljs-value">[
+              {
+                "<span class="hljs-attribute">appliedFilters</span>": <span class="hljs-value">[]</span>,
+                "<span class="hljs-attribute">cardSize</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+                "<span class="hljs-attribute">cardType</span>": <span class="hljs-value"><span class="hljs-string">"Column"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Supervisor district"</span></span>,
+                "<span class="hljs-attribute">expanded</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+                "<span class="hljs-attribute">fieldName</span>": <span class="hljs-value"><span class="hljs-string">":@computed_region_p3v4_2swa"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"District"</span>
+             </span>}
+            ]</span>,
+            "<span class="hljs-attribute">datasetId</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">pageId</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">primaryAmountField</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">primaryAggregation</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>}
+      ]
+    </span>}
+</code></pre></li></ul></section><h4 id="-full-text-search">Full text search&nbsp;<a href="#-full-text-search"><i class="fa fa-link"></i></a></h4><p>Full text search will perform a query against all documents in the corpus. Specifically, we will query the fields <code>name, description, category</code> as well as the fields representing <code>column fieldnames, names and description</code>.</p>
+<section id="-full-text-search-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Full text search API</span></div><div style="float:left"><a href="#-full-text-search-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?q}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#231e190c9a403e364ea64b57c9a54422" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="231e190c9a403e364ea64b57c9a54422" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+      "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
+        {
+          "<span class="hljs-attribute">classification</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">tags</span>":<span class="hljs-value">[<span class="hljs-string">"tag1"</span>, <span class="hljs-string">"tag2"</span>]</span>,
+            "<span class="hljs-attribute">category</span>":<span class="hljs-value"><span class="hljs-string">"Public Health"</span>
+          </span>}</span>,
+
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
+            "<span class="hljs-attribute">columns</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">location_state</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A location (state)"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Location (state)"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">15</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"City for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"CITY"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">zipcode</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">23</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"5 digit postal Zip Code for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"ZIPCODE"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+              </span>}
+            </span>}</span>,
+            "<span class="hljs-attribute">defaultPage</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"moco-migrationtest.demo.socrata.com"</span></span>,
+            "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">locale</span>": <span class="hljs-value"><span class="hljs-string">"en_US"</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">ownerId</span>": <span class="hljs-value"><span class="hljs-string">"h6pt-apgn"</span></span>,
+            "<span class="hljs-attribute">rowDisplayUnit</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+            "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value"><span class="hljs-string">"2015-01-06T16:59:37.000-08:00"</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>},
+        {
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"page"</span></span>,
+            "<span class="hljs-attribute">cards</span>": <span class="hljs-value">[
+              {
+                "<span class="hljs-attribute">appliedFilters</span>": <span class="hljs-value">[]</span>,
+                "<span class="hljs-attribute">cardSize</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+                "<span class="hljs-attribute">cardType</span>": <span class="hljs-value"><span class="hljs-string">"Column"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Supervisor district"</span></span>,
+                "<span class="hljs-attribute">expanded</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+                "<span class="hljs-attribute">fieldName</span>": <span class="hljs-value"><span class="hljs-string">":@computed_region_p3v4_2swa"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"District"</span>
+             </span>}
+            ]</span>,
+            "<span class="hljs-attribute">datasetId</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">pageId</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">primaryAmountField</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">primaryAggregation</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>}
+      ]
+    </span>}
+</code></pre></li></ul></section><h4 id="-pagination">Pagination&nbsp;<a href="#-pagination"><i class="fa fa-link"></i></a></h4><p>The search service allows pagination of results.  By default, we will return at most 100 results starting from 0.</p>
+<section id="-pagination-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Pagination API</span></div><div style="float:left"><a href="#-pagination-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?offset,limit}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#8ef9fff7710ee0a30c1cd33bece251e1" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="8ef9fff7710ee0a30c1cd33bece251e1" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+      "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
+        {
+          "<span class="hljs-attribute">classification</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">tags</span>":<span class="hljs-value">[<span class="hljs-string">"tag1"</span>, <span class="hljs-string">"tag2"</span>]</span>,
+            "<span class="hljs-attribute">category</span>":<span class="hljs-value"><span class="hljs-string">"Public Health"</span>
+          </span>}</span>,
+
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
+            "<span class="hljs-attribute">columns</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">location_state</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A location (state)"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Location (state)"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">15</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"City for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"CITY"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">zipcode</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">23</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"5 digit postal Zip Code for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"ZIPCODE"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+              </span>}
+            </span>}</span>,
+            "<span class="hljs-attribute">defaultPage</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"moco-migrationtest.demo.socrata.com"</span></span>,
+            "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">locale</span>": <span class="hljs-value"><span class="hljs-string">"en_US"</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">ownerId</span>": <span class="hljs-value"><span class="hljs-string">"h6pt-apgn"</span></span>,
+            "<span class="hljs-attribute">rowDisplayUnit</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+            "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value"><span class="hljs-string">"2015-01-06T16:59:37.000-08:00"</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>},
+        {
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"page"</span></span>,
+            "<span class="hljs-attribute">cards</span>": <span class="hljs-value">[
+              {
+                "<span class="hljs-attribute">appliedFilters</span>": <span class="hljs-value">[]</span>,
+                "<span class="hljs-attribute">cardSize</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+                "<span class="hljs-attribute">cardType</span>": <span class="hljs-value"><span class="hljs-string">"Column"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Supervisor district"</span></span>,
+                "<span class="hljs-attribute">expanded</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+                "<span class="hljs-attribute">fieldName</span>": <span class="hljs-value"><span class="hljs-string">":@computed_region_p3v4_2swa"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"District"</span>
+             </span>}
+            ]</span>,
+            "<span class="hljs-attribute">datasetId</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">pageId</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">primaryAmountField</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">primaryAggregation</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>}
+      ]
+    </span>}
+</code></pre></li></ul></section><h4 id="-limiting-results-to-specific-resource-types">Limiting results to specific resource types&nbsp;<a href="#-limiting-results-to-specific-resource-types"><i class="fa fa-link"></i></a></h4><p>The search service currently indexes datasets and pages with new resource types to be added in the future.  The caller can restrict the results to a particular type (<code>pages</code>, <code>datasets</code>) by specifying this parameter.</p>
+<section id="-limiting-results-to-specific-resource-types-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Resource search API</span></div><div style="float:left"><a href="#-limiting-results-to-specific-resource-types-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?only}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#5a6b7ee1fcbb9e7c90ff502800e10c03" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="5a6b7ee1fcbb9e7c90ff502800e10c03" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+      "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
+        {
+          "<span class="hljs-attribute">classification</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">tags</span>":<span class="hljs-value">[<span class="hljs-string">"tag1"</span>, <span class="hljs-string">"tag2"</span>]</span>,
+            "<span class="hljs-attribute">category</span>":<span class="hljs-value"><span class="hljs-string">"Public Health"</span>
+          </span>}</span>,
+
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
+            "<span class="hljs-attribute">columns</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">location_state</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A location (state)"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Location (state)"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">15</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"City for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"CITY"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">zipcode</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">23</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"5 digit postal Zip Code for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"ZIPCODE"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+              </span>}
+            </span>}</span>,
+            "<span class="hljs-attribute">defaultPage</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"moco-migrationtest.demo.socrata.com"</span></span>,
+            "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">locale</span>": <span class="hljs-value"><span class="hljs-string">"en_US"</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">ownerId</span>": <span class="hljs-value"><span class="hljs-string">"h6pt-apgn"</span></span>,
+            "<span class="hljs-attribute">rowDisplayUnit</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+            "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value"><span class="hljs-string">"2015-01-06T16:59:37.000-08:00"</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>},
+        {
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"page"</span></span>,
+            "<span class="hljs-attribute">cards</span>": <span class="hljs-value">[
+              {
+                "<span class="hljs-attribute">appliedFilters</span>": <span class="hljs-value">[]</span>,
+                "<span class="hljs-attribute">cardSize</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+                "<span class="hljs-attribute">cardType</span>": <span class="hljs-value"><span class="hljs-string">"Column"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Supervisor district"</span></span>,
+                "<span class="hljs-attribute">expanded</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+                "<span class="hljs-attribute">fieldName</span>": <span class="hljs-value"><span class="hljs-string">":@computed_region_p3v4_2swa"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"District"</span>
+             </span>}
+            ]</span>,
+            "<span class="hljs-attribute">datasetId</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">pageId</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">primaryAmountField</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">primaryAggregation</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>}
+      ]
+    </span>}
+</code></pre></li></ul></section><h4 id="-including-additional-render-metadata">Including additional render metadata&nbsp;<a href="#-including-additional-render-metadata"><i class="fa fa-link"></i></a></h4><p>By default (not yet implemented), the search service will only return result data that is useful to a general caller. For the frontend, where additional metadata is stored and may be useful, you can set this flag to true in order to have additional metadata for rendering the dataset or page.</p>
+<section id="-including-additional-render-metadata-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Internal metadata API</span></div><div style="float:left"><a href="#-including-additional-render-metadata-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?include_internal_metadata}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#797157e4865409531adff8571560b72c" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="797157e4865409531adff8571560b72c" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+      "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
+        {
+          "<span class="hljs-attribute">classification</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">tags</span>":<span class="hljs-value">[<span class="hljs-string">"tag1"</span>, <span class="hljs-string">"tag2"</span>]</span>,
+            "<span class="hljs-attribute">category</span>":<span class="hljs-value"><span class="hljs-string">"Public Health"</span>
+          </span>}</span>,
+
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
+            "<span class="hljs-attribute">columns</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">location_state</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A location (state)"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Location (state)"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">15</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"City for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"CITY"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">zipcode</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">23</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"5 digit postal Zip Code for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"ZIPCODE"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+              </span>}
+            </span>}</span>,
+            "<span class="hljs-attribute">defaultPage</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"moco-migrationtest.demo.socrata.com"</span></span>,
+            "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">locale</span>": <span class="hljs-value"><span class="hljs-string">"en_US"</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">ownerId</span>": <span class="hljs-value"><span class="hljs-string">"h6pt-apgn"</span></span>,
+            "<span class="hljs-attribute">rowDisplayUnit</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+            "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value"><span class="hljs-string">"2015-01-06T16:59:37.000-08:00"</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>},
+        {
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"page"</span></span>,
+            "<span class="hljs-attribute">cards</span>": <span class="hljs-value">[
+              {
+                "<span class="hljs-attribute">appliedFilters</span>": <span class="hljs-value">[]</span>,
+                "<span class="hljs-attribute">cardSize</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+                "<span class="hljs-attribute">cardType</span>": <span class="hljs-value"><span class="hljs-string">"Column"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Supervisor district"</span></span>,
+                "<span class="hljs-attribute">expanded</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+                "<span class="hljs-attribute">fieldName</span>": <span class="hljs-value"><span class="hljs-string">":@computed_region_p3v4_2swa"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"District"</span>
+             </span>}
+            ]</span>,
+            "<span class="hljs-attribute">datasetId</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">pageId</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">primaryAmountField</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">primaryAggregation</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>}
+      ]
+    </span>}
+</code></pre></li></ul></section><h4 id="-complete-search-api">Complete Search API&nbsp;<a href="#-complete-search-api"><i class="fa fa-link"></i></a></h4><p>The full search API is detailed here, with some additional options such as <code>tags</code> and <code>highlight</code> which are not yet implemented.</p>
+<section id="-complete-search-api-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Search API with all options</span></div><div style="float:left"><a href="#-complete-search-api-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?domains,categories,tags,q,offset,limit,only,include_internal_metadata,highlight}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#b59128ad967e0c9bb4dc317e5ab0c4dc" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="b59128ad967e0c9bb4dc317e5ab0c4dc" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+      "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
+        {
+          "<span class="hljs-attribute">classification</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">tags</span>":<span class="hljs-value">[<span class="hljs-string">"tag1"</span>, <span class="hljs-string">"tag2"</span>]</span>,
+            "<span class="hljs-attribute">category</span>":<span class="hljs-value"><span class="hljs-string">"Public Health"</span>
+          </span>}</span>,
+
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
+            "<span class="hljs-attribute">columns</span>": <span class="hljs-value">{
+              "<span class="hljs-attribute">location_state</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"A location (state)"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Location (state)"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">city</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">15</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"City for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"CITY"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"text"</span>
+              </span>}</span>,
+              "<span class="hljs-attribute">zipcode</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">cardinality</span>": <span class="hljs-value"><span class="hljs-number">23</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"5 digit postal Zip Code for the Public Library"</span></span>,
+                "<span class="hljs-attribute">fred</span>": <span class="hljs-value"><span class="hljs-string">"category"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"ZIPCODE"</span></span>,
+                "<span class="hljs-attribute">physicalDatatype</span>": <span class="hljs-value"><span class="hljs-string">"number"</span>
+              </span>}
+            </span>}</span>,
+            "<span class="hljs-attribute">defaultPage</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"moco-migrationtest.demo.socrata.com"</span></span>,
+            "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">locale</span>": <span class="hljs-value"><span class="hljs-string">"en_US"</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">ownerId</span>": <span class="hljs-value"><span class="hljs-string">"h6pt-apgn"</span></span>,
+            "<span class="hljs-attribute">rowDisplayUnit</span>": <span class="hljs-value"><span class="hljs-string">"row"</span></span>,
+            "<span class="hljs-attribute">updatedAt</span>": <span class="hljs-value"><span class="hljs-string">"2015-01-06T16:59:37.000-08:00"</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>},
+        {
+          "<span class="hljs-attribute">resource</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">type</span>":<span class="hljs-value"><span class="hljs-string">"page"</span></span>,
+            "<span class="hljs-attribute">cards</span>": <span class="hljs-value">[
+              {
+                "<span class="hljs-attribute">appliedFilters</span>": <span class="hljs-value">[]</span>,
+                "<span class="hljs-attribute">cardSize</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+                "<span class="hljs-attribute">cardType</span>": <span class="hljs-value"><span class="hljs-string">"Column"</span></span>,
+                "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Supervisor district"</span></span>,
+                "<span class="hljs-attribute">expanded</span>": <span class="hljs-value"><span class="hljs-literal">false</span></span>,
+                "<span class="hljs-attribute">fieldName</span>": <span class="hljs-value"><span class="hljs-string">":@computed_region_p3v4_2swa"</span></span>,
+                "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"District"</span>
+             </span>}
+            ]</span>,
+            "<span class="hljs-attribute">datasetId</span>": <span class="hljs-value"><span class="hljs-string">"xqvj-wiwq"</span></span>,
+            "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Locations of all Montgomery County, MD Public Libraries."</span></span>,
+            "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"Libraries"</span></span>,
+            "<span class="hljs-attribute">pageId</span>": <span class="hljs-value"><span class="hljs-string">"5b5c-jj6z"</span></span>,
+            "<span class="hljs-attribute">primaryAmountField</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">primaryAggregation</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+            "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">1</span>
+          </span>}
+        </span>}
+      ]
+    </span>}
+</code></pre></li></ul></section><h4 id="-listing-domains">Listing Domains&nbsp;<a href="#-listing-domains"><i class="fa fa-link"></i></a></h4><p>The search service has the ability to return information regarding the domains in its index.  Return body and functionality to be determined</p>
+<section id="-listing-domains-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Return all domains</span></div><div style="float:left"><a href="#-listing-domains-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1/domains</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#e3f328f3277dacc66392426b203f47cf" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="e3f328f3277dacc66392426b203f47cf" class="list-group-item panel-collapse collapse"><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Not yet implemented"</span>
+</span>}
+</code></pre></li></ul></section><h4 id="-searching-for-tags">Searching for tags&nbsp;<a href="#-searching-for-tags"><i class="fa fa-link"></i></a></h4><p>Returns aggregate tag statistics as well as a list of tags.  Return body and functionality to be determined</p>
+<section id="-searching-for-tags-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Return tags</span></div><div style="float:left"><a href="#-searching-for-tags-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1/tags</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#f3a850eea49107c889bc529bc65ce9b5" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="f3a850eea49107c889bc529bc65ce9b5" class="list-group-item panel-collapse collapse"><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Not yet implemented"</span>
+</span>}
+</code></pre></li></ul></section><h4 id="-searching-for-categories">Searching for categories&nbsp;<a href="#-searching-for-categories"><i class="fa fa-link"></i></a></h4><p>Returns aggregate category statistics as well as a list of categories.  Return body and functionality to be determined</p>
+<section id="-searching-for-categories-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Return categories</span></div><div style="float:left"><a href="#-searching-for-categories-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1/categories</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#c92145138466b0faeeb3a8ebcc790a3b" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="c92145138466b0faeeb3a8ebcc790a3b" class="list-group-item panel-collapse collapse"><h5>Body</h5><pre><code>{
+    "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Not yet implemented"</span>
+</span>}
+</code></pre></li></ul></section></div></div></div></div><!-- block scripts--><!--     script--><!--         :coffee--><!--             $('table').addClass 'table'--><!--     if livePreview--><!--         script--><!--             :coffee--><!--                 socket = io()--><!--                 socket.on "refresh", (msg) ->--><!--                     $(document.body).html(msg)--></div></div>
