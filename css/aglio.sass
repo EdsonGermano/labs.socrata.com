@@ -1,0 +1,149 @@
+---
+---
+
+//colors
+$color_tundora_approx: #444
+$color_alto_approx: #ddd
+$color_gallery_approx: #eee
+$black_10: rgba(0,0,0,0.1)
+$white_70: rgba(255,255,255,0.7)
+$color_desert_storm_approx: #f8f8f8
+$color_fuscous_gray_approx: #555
+$color_wild_sand_approx: #f5f5f5
+$color_athens_gray_approx: #ecf0f1
+
+h4
+  font-size: 100%
+  font-weight: bold
+  text-transform: uppercase
+  a
+    display: none
+
+  &:hover a
+    display: inline
+
+h5
+  a
+    display: none
+
+  &:hover a
+    display: inline
+
+h1
+  a
+    display: none
+
+  &:hover a
+    display: inline
+
+h2
+  a
+    display: none
+
+  &:hover a
+    display: inline
+
+h3
+  a
+    display: none
+
+  &:hover a
+    display: inline
+
+code
+  color: $color_tundora_approx
+  background-color: $color_alto_approx
+
+a[data-target]
+  cursor: pointer
+
+.back-to-top
+  position: fixed
+  z-index: 1
+  bottom: 0
+  right: 24px
+  padding: 4px 8px
+  background-color: $color_gallery_approx
+  text-decoration: none !important
+  border-top: 1px solid $black_10
+  border-left: 1px solid $black_10
+  border-right: 1px solid $black_10
+  //If you use compass, instead of the line below you could use +border-top-left-radius($radius)
+  border-top-left-radius: 3px
+  //If you use compass, instead of the line below you could use +border-top-right-radius($radius)
+  border-top-right-radius: 3px
+
+.panel
+  overflow: hidden
+
+.panel-heading
+  code
+    margin-left: 3px
+    background-color: $white_70
+    white-space: pre-wrap
+    white-space: -pre-wrap
+    word-wrap: break-word
+
+  h3
+    margin-top: 10px
+    margin-bottom: 10px
+
+
+.indent
+  display: block
+  text-indent: 16px
+
+.list-group-item
+  padding-left: 16px
+  .toggle
+    .open
+      display: block
+
+    .closed
+      display: none
+
+  &.collapse
+    display: none
+    &.in
+      display: block
+
+  a
+    span
+      &.closed
+        display: none
+
+      &.open
+        display: block
+
+
+    &.collapsed span
+      &.closed
+        display: block
+
+      &.open
+        display: none
+
+  &.collapsed .toggle
+    .open
+      display: none
+
+    .closed
+      display: block
+
+a.list-group-item
+  font-size: 13px
+  white-space: nowrap
+  text-overflow: ellipsis
+  overflow: hidden
+  &:hover
+    background-color: $color_desert_storm_approx
+    border-left: 2px solid $color_fuscous_gray_approx
+    padding-left: 15px
+    background-color: $color_wild_sand_approx
+    border-left-color: $color_fuscous_gray_approx
+
+  &.heading
+    font-size: 15px
+    background-color: $color_athens_gray_approx
+    &:hover
+      background-color: $color_wild_sand_approx
