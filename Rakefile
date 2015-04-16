@@ -24,6 +24,8 @@ task :build_apis do
 ---
 layout: default
 title: #{config["name"]}
+custom_css:
+- /css/aglio.css
 ---
       eos
 
