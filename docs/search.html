@@ -1,12 +1,20 @@
 ---
 layout: default
 title: Catalog Search API
+description: Provides both domain-specific and global search across all Socrata open data catalogs.
 version: initial
+stub: search
 type: api
 icon: fa fa-fw fa-search
+last_updated: 2015-04-16
+bodyclass: api
 custom_css:
 - /css/aglio.css
 ---
+
+<div class="alert alert-info">
+  <p><em>Heads up!</em> This is beta version of the {{page.title}} API. Functionality may change, so please come back and check this documentation if your code suddenly stops working properly. Feel free to <a href="http://stackoverflow.com/questions/ask?tags=soda,socrata,labs,version-{{page.version}},{{page.stub}}" class="feedback" target="_blank">provide feedback</a> on this API.</p>
+</div>
 <div class="container-fluid content"><div class="row with-sidebar"><div class="col-md-3 hidden-phone"><nav id="nav" class="hidden-sm hidden-xs nav"><div class="list-group"><a data-toggle="" data-target="#-menu" href="#" class="list-group-item heading collapsed">Resource Group</a><div id="-menu"><a href="#-search-endpoint" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item">Search Endpoint</a><a href="#-searching-particular-domains" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching particular domains</a><a href="#-searching-particular-categories" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching particular categories</a><a href="#-full-text-search" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Full text search</a><a href="#-pagination" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Pagination</a><a href="#-limiting-results-to-specific-resource-types" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Limiting results to specific resource types</a><a href="#-including-additional-render-metadata" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Including additional render metadata</a><a href="#-complete-search-api" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Complete Search API</a><a href="#-listing-domains" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Listing Domains</a><a href="#-searching-for-tags" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching for tags</a><a href="#-searching-for-categories" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching for categories</a></div></div></nav></div><div class="col-md-9"><div><header><div class="page-header"><h1 id="top">API Documentation</h1></div></header><div class="description"><h1 id="cetera-search-service">Cetera — Search Service</h1>
 <p>Features may not be implemented yet (such as the <code>highlight</code> option); however, we wish to future proof the API against version changes.
 The flag <code>include_internal_metadata</code> should be set to <code>true</code> for the frontend, although its presence (or lack of presence) may be ignored for now.

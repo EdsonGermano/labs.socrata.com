@@ -1,10 +1,13 @@
 search:
   name: Catalog Search API
+  description: Provides both domain-specific and global search across all Socrata open data catalogs.
   icon: fa fa-fw fa-search
   version: initial
   blueprint: "https://raw.githubusercontent.com/socrata/cetera/master/apiary.apib?token=AABOA2XUwZmg35sxvsErUlmYlOb8UP62ks5VOTciwA%3D%3D"
+
 export:
   name: Export API
+  description: Provides functionality to export individual datasets, including the option of providing a SoQL query to filter the data returned.
   icon: fa fa-fw fa-file-text-o
   version: initial
   blueprint: "https://raw.githubusercontent.com/socrata/export-service/master/apiary.apib?token=AABOA5fsTUSQnCQLcfGabb8TILl9GEzNks5VOWRYwA%3D%3D"

@@ -24,12 +24,20 @@ task :build_apis do
 ---
 layout: default
 title: #{config["name"]}
+description: #{config["description"]}
 version: #{config["version"]}
+stub: #{name}
 type: api
 icon: #{config["icon"]}
+last_updated: #{Time.now.strftime("%Y-%m-%d")}
+bodyclass: api
 custom_css:
 - /css/aglio.css
 ---
+
+<div class="alert alert-info">
+  <p><em>Heads up!</em> This is beta version of the {{page.title}} API. Functionality may change, so please come back and check this documentation if your code suddenly stops working properly. Feel free to <a href="http://stackoverflow.com/questions/ask?tags=soda,socrata,labs,version-{{page.version}},{{page.stub}}" class="feedback" target="_blank">provide feedback</a> on this API.</p>
+</div>
       eos
 
       # Run it through aglio

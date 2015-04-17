@@ -1,13 +1,43 @@
 ---
 layout: default
-title: Home
+title: Socrata Labs
+bodyclass: homepage
 ---
 
-<div class="hero-unit clearfix">
-  <div class="giant">
-    <img src="/img/beaker.png" alt="Socrata Labs" />
+<div class="fat-header hidden-sm hidden-xs">
+  <img src="/img/beaker.png" alt="Socrata Labs" class="pull-left beaker" />
+  <h1 class="hello-dolly">Welcome to the future!</h1>
+</div>
+
+<div class="intro">
+  <h1 class="tagline">We're cooking up something awesome, and we want you to help.</h1>
+  <p><a href="/">Socrata Labs</a> is your chance to preview and provide feedback on some of the awesome new developer resources coming from the <a href="http://dev.socrata.com">Socrata Developer Program</a>. Experiment with them, try new things, but keep in mind that the APIs and tools listed here should be considered <em>beta</em>, and may change in the future.</p>
+
+  <div class="row listing">
+  {% for page in site.pages %}
+    {% if page.type == 'api' %}
+      <div class="block">
+        <h3><a href="{{ page.url }}"><i class="{{ page.icon }}"></i> {{ page.title }}</a></h3>
+
+        <p>{{ page.description }}</p>
+
+        <ul class="metadata">
+          <li><em>Version:</em> {{ page.version }}</li>
+          <li><em>Last Updated:</em> {{ page.last_updated }}</li>
+        </ul>
+
+        <div class="links btn-group">
+          <button class="btn btn-default"><a href="{{ page.url }}" class="docs"><i class="fa fa-book alt"></i> Beta Docs</a></button>
+          <button class="btn btn-default"><a href="http://stackoverflow.com/questions/ask?tags=soda,socrata,labs,version-{{page.version}},{{page.stub}}" class="feedback" target="_blank"><i class="fa fa-comments-o"></i> Provide Feedback</a></button>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
   </div>
-  <h1 class="tagline">What'll we think of next?</h1>
-  <p><a href="http://www.socrata.com">Socrata</a> is cooking up great things with your open data. Watch this space - we'll make sure you don't miss the party!</p>
-  <p><a class="btn btn-primary btn-large">Coming Soon!</a></p>
+
+  <div class="feedback">
+    <h2>Providing Feedback</h2>
+
+    <p>On each page of documentation, or in the menu above, you'll find a "Feedback" button that will take you to <a href="http://stackoverflow.com">Stack Overflow</a> to provide feedback about that API. We'll even automatically fill in the right tags to make sure we know which API you're talking about.</p>
+  </div>
 </div>
