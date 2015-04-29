@@ -28,7 +28,7 @@ bodyclass: homepage
 
         <div class="links btn-group">
           <button class="btn btn-default"><a href="{{ page.url }}" class="docs"><i class="fa fa-book alt"></i> Beta Docs</a></button>
-          <button class="btn btn-default"><a href="http://stackoverflow.com/questions/ask?tags=soda,socrata,labs,version-{{page.version}},{{page.stub}}" class="feedback" target="_blank"><i class="fa fa-comments-o"></i> Provide Feedback</a></button>
+          <button class="btn btn-default"><a href="{{ page.feedback_url }}" class="feedback" target="_blank"><i class="fa fa-comments-o"></i> Provide Feedback</a></button>
         </div>
       </div>
     {% endif %}

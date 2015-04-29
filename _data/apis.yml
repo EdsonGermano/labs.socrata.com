@@ -4,10 +4,12 @@ search:
   icon: fa fa-fw fa-search
   version: initial
   blueprint: "https://raw.githubusercontent.com/socrata/cetera/apiary_documentation_updates/apiary.apib"
+  feedback_url: https://github.com/socrata/cetera/issues/new
 
 export:
   name: Export API
   description: Provides functionality to export individual datasets, including the option of providing a SoQL query to filter the data returned.
   icon: fa fa-fw fa-file-text-o
   version: initial
-  blueprint: "https://raw.githubusercontent.com/socrata/export-service/master/apiary.apib?token=AABOAyZpYlysKRv94rWotwjAWelgYDG2ks5VQGszwA%3D%3D"
+  blueprint: "https://raw.githubusercontent.com/socrata/export-service/master/apiary.apib?token=AABOA9tWJtv7PQkShcNx1ajbtoN9WKsIks5VSnKuwA%3D%3D"
+  feedback_url: "http://stackoverflow.com/questions/ask?tags=soda,socrata,labs,version-initial,search"

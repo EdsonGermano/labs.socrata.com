@@ -29,6 +29,7 @@ version: #{config["version"]}
 stub: #{name}
 type: api
 icon: #{config["icon"]}
+feedback_url: #{config["feedback_url"]}
 last_updated: #{Time.now.strftime("%Y-%m-%d")}
 bodyclass: api
 custom_css:
