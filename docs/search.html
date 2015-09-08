@@ -7,36 +7,42 @@ stub: search
 type: api
 icon: fa fa-fw fa-search
 feedback_url: https://github.com/socrata/cetera/issues/new
-last_updated: 2015-04-29
+last_updated: 2015-09-08
 bodyclass: api
 custom_css:
 - /css/aglio.css
 ---
 
 <div class="alert alert-info">
-  <p><em>Heads up!</em> This is beta version of the {{page.title}} API. Functionality may change, so please come back and check this documentation if your code suddenly stops working properly. Feel free to <a href="http://stackoverflow.com/questions/ask?tags=soda,socrata,labs,version-{{page.version}},{{page.stub}}" class="feedback" target="_blank">provide feedback</a> on this API.</p>
+  <p><em>Heads up!</em> This is beta version of the {{page.title}}. Functionality may change, so please come back and check this documentation if your code suddenly stops working properly. Feel free to <a href="http://stackoverflow.com/questions/ask?tags=soda,socrata,labs,version-{{page.version}},{{page.stub}}" class="feedback" target="_blank">provide feedback</a> on this API.</p>
 </div>
-<div class="container-fluid content"><div class="row with-sidebar"><div class="col-md-3 hidden-phone"><nav id="nav" class="hidden-sm hidden-xs nav"><div class="list-group"><a data-toggle="" data-target="#-menu" href="#" class="list-group-item heading collapsed">Resource Group</a><div id="-menu"><a href="#-search-endpoint" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item">Search Endpoint</a><a href="#-searching-particular-domains" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching particular domains</a><a href="#-searching-particular-categories" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching particular categories</a><a href="#-full-text-search" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Full text search</a><a href="#-pagination" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Pagination</a><a href="#-limiting-results-to-specific-resource-types" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Limiting results to specific resource types</a><a href="#-including-additional-render-metadata" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Including additional render metadata</a><a href="#-complete-search-api" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Complete Search API</a><a href="#-listing-domains" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Listing Domains</a><a href="#-searching-for-tags" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching for tags</a><a href="#-searching-for-categories" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching for categories</a></div></div></nav></div><div class="col-md-9"><div><header><div class="page-header"><h1 id="top">API Documentation</h1></div></header><div class="description"><h1 id="catalog">Catalog</h1>
-<p>Main endpoint for querying the catalog of datasets housed by Socrata. Datasets can be found by keywords, domains, high level categorizations, or more granular tags. A given datset may be associated with 0 or more categories or tags. Tags are assigned automatically via stastically derived models; an individual tag may return a confidence value corresponding to model confidence.</p>
+<div class="container-fluid content"><div class="row with-sidebar"><div class="col-md-3 hidden-phone"><nav id="nav" class="hidden-sm hidden-xs nav"><div class="list-group"><a data-toggle="" data-target="#-menu" href="#" class="list-group-item heading collapsed">Resource Group</a><div id="-menu"><a href="#-search-endpoint" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item">Search Endpoint</a><a href="#-searching-particular-domains" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching particular domains</a><a href="#-searching-particular-categories" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching particular categories</a><a href="#-full-text-search" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Full text search</a><a href="#-pagination" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Pagination</a><a href="#-limiting-results-to-specific-resource-types" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Limiting results to specific resource types</a><a href="#-including-additional-render-metadata" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Including additional render metadata</a><a href="#-complete-search-api" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Complete Search API</a><a href="#-listing-domains" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Listing Domains</a><a href="#-searching-for-tags" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching for tags</a><a href="#-searching-for-categories" style="border-top-left-radius: 0; border-top-right-radius: 0" class="list-group-item"><span class="badge alert-info"><i class="fa fa-arrow-down"></i></span>Searching for categories</a></div></div><p style="text-align: center; word-wrap: break-word;"><a href="api.us.socrata.com/api">api.us.socrata.com/api</a></p></nav></div><div class="col-md-9"><div><header><div class="page-header"><h1 id="top">Catalog</h1></div></header><div class="description"><p>Main endpoint for querying the catalog of datasets housed by Socrata. Datasets can be found by keywords, domains, high level categorizations, or more granular tags. A given datset may be associated with 0 or more categories or tags. Tags are assigned automatically via stastically derived models; an individual tag may return a confidence value corresponding to model confidence.</p>
 <p>Note: select features may not be implemented but are included to future proof the API against version changes.</p>
 <p>All calls return a JSON object containing a list of datasets and pages ranked by relevance in a <code>results</code> field. This <code>results</code> array contains an array of hashes. Each hash contains a key <code>resource</code> containing the resource to be returned. Hashes may contain additional fields to <code>resource</code> including metadata about the resource, such as the <code>classification</code> object. Each resource is either a page or a dataset.</p>
 <p>Pages and datasets are distinguished by the <code>type</code> field. This is set to <code>dataset</code> for datasets and to <code>page</code> for pages. Additionally, the bodies differ from each other as follows:</p>
 <ul>
-<li>Pages include the fields <code>pageId</code>, <code>datasetId</code>, and <code>cards</code>,</li>
-<li>Datasets include the fields <code>id</code> and <code>columns</code>.</li>
+<li>
+<p>Pages include the fields <code>pageId</code>, <code>datasetId</code>, and <code>cards</code>,</p>
+</li>
+<li>
+<p>Datasets include the fields <code>id</code> and <code>columns</code>.</p>
+</li>
 </ul>
 <p>With the exception of the additional <code>type</code> field, the objects in the <code>resources</code> field are unaltered from their representation in whatever owns their truth.</p>
 <p>The production API endpoint for the Labs version of this API is <code>https://api.us.socrata.com/api/catalog/v1</code>. For example, to query for datasets categorized as <code>Crime</code>, you could use the following query:</p>
 <p><a class="tryit" href="http://api.us.socrata.com/api/catalog/v1?categories=public%20safety">http://api.us.socrata.com/api/catalog/v1?categories=public safety</a></p>
 <p><em>Please note that we assume that all calls include either the <code>X-App-Token</code> header or the <code>$$app_token</code> parameters set to a valid token. This is assumed and not documented in the API spec below.</em></p>
-</div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="">Resource Group&nbsp;<a href="#"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><h4 id="-search-endpoint">Search Endpoint&nbsp;<a href="#-search-endpoint"><i class="fa fa-link"></i></a></h4><h4 id="-searching-particular-domains">Searching particular domains&nbsp;<a href="#-searching-particular-domains"><i class="fa fa-link"></i></a></h4><p>When no <code>domain</code> parameter is passed, the search service returns results from the entire corpus.</p>
-<section id="-searching-particular-domains-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Domain Search API</span></div><div style="float:left"><a href="#-searching-particular-domains-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?domains}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#2fd2fb5a647e37d96e82b94b4dc09555" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="2fd2fb5a647e37d96e82b94b4dc09555" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+</div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="">Resource Group&nbsp;<a href="#"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><h4 id="-search-endpoint">Search Endpoint&nbsp;<a href="#-search-endpoint"><i class="fa fa-link"></i></a></h4><h4 id="-searching-particular-domains">Searching particular domains&nbsp;<a href="#-searching-particular-domains"><i class="fa fa-link"></i></a></h4><p>When no <code>domains</code> parameter is passed, the search service returns results from the entire corpus.</p>
+<section id="-searching-particular-domains-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Domain Search API</span></div><div style="float:left"><a href="#-searching-particular-domains-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?domains,search_context}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>domains</dt><dd><code>list[string]</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>data.seattle.gov,data.hawaii.gov</span></span><p>A comma separated list of cnames. Returns results restricted to only the domains in the list. When not present, searches the entire catalog.</p>
+</dd><dt>search_context</dt><dd><code>string</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>data.seattle.gov</span></span><p>Specifies the domain from where this query was issues and for which categories will be used in search.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#1f2e517c53b74f3b04aba93684f862f3" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="1f2e517c53b74f3b04aba93684f862f3" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>{
       "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
         {
         "<span class="hljs-attribute">resource</span>" :
           <span class="hljs-value">{
             "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span></span>,
-            "<span class="hljs-attribute">description</span>" : <span class="hljs-value"><span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
+            "<span class="hljs-attribute">view_count</span>": <span class="hljs-value"><span class="hljs-number">3456</span>
+            <span class="hljs-string">"description"</span> : <span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
             "<span class="hljs-attribute">updatedAt</span>" : <span class="hljs-value"><span class="hljs-string">"2015-02-19T20:01:56.000Z"</span></span>,
             "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
             "<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-string">"ekqi-b8f3"</span></span>,
@@ -61,7 +67,9 @@ custom_css:
           </span>}</span>,
           "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[<span class="hljs-string">"Transportation"</span>]</span>, 
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]</span>,
+            "<span class="hljs-attribute">contextual_categories</span>": <span class="hljs-value">[<span class="hljs-string">"Things that move"</span>]</span>,
+            "<span class="hljs-attribute">contextual_tags</span>" : <span class="hljs-value">[<span class="hljs-string">"planes"</span>, <span class="hljs-string">"trains"</span>, <span class="hljs-string">"automobiles"</span>]
             </span>}</span>,
           "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span> </span>}</span>,
           "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.seattle.gov/ux/dataset/ekqi-b8f3"</span>
@@ -127,7 +135,7 @@ custom_css:
           </span>}</span>,
         "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{ 
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[ <span class="hljs-string">"Health"</span> ]</span>,
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ] 
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ]
         </span>}</span>,
         "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.medicare.gov"</span> </span>}</span>,
         "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.medicare.gov/view/jct9-bvdr"</span>
@@ -135,15 +143,16 @@ custom_css:
         ]</span>,
     "<span class="hljs-attribute">resultSetSize</span>" : <span class="hljs-value"><span class="hljs-number">11588</span></span>,
     "<span class="hljs-attribute">timings</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">serviceMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span></span>, "<span class="hljs-attribute">searchMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span> </span>}
-</span>}
-</code></pre></li></ul></section><h4 id="-searching-particular-categories">Searching particular categories&nbsp;<a href="#-searching-particular-categories"><i class="fa fa-link"></i></a></h4><p>When no <code>categories</code> parameter is passed, the search service returns results from the entire set of categories.</p>
-<section id="-searching-particular-categories-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Category Search API</span></div><div style="float:left"><a href="#-searching-particular-categories-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?categories}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#35738f0dacf38cceee0beaed18948be5" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="35738f0dacf38cceee0beaed18948be5" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+</span>}</code></pre></li></ul></section><h4 id="-searching-particular-categories">Searching particular categories&nbsp;<a href="#-searching-particular-categories"><i class="fa fa-link"></i></a></h4><p>When no <code>categories</code> parameter is passed, the search service returns results from the entire set of categories.</p>
+<section id="-searching-particular-categories-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Category Search API</span></div><div style="float:left"><a href="#-searching-particular-categories-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?categories}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>categories</dt><dd><code>list[string]</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>Health,Finance</span></span><p>A comma separated list of categories. Return results restricted to only the categories specified (OR). When not present, searches all categories.</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#357a4ea792434ada3e4cf878953f4a53" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="357a4ea792434ada3e4cf878953f4a53" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>{
       "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
         {
         "<span class="hljs-attribute">resource</span>" :
           <span class="hljs-value">{
             "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span></span>,
-            "<span class="hljs-attribute">description</span>" : <span class="hljs-value"><span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
+            "<span class="hljs-attribute">view_count</span>": <span class="hljs-value"><span class="hljs-number">3456</span>
+            <span class="hljs-string">"description"</span> : <span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
             "<span class="hljs-attribute">updatedAt</span>" : <span class="hljs-value"><span class="hljs-string">"2015-02-19T20:01:56.000Z"</span></span>,
             "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
             "<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-string">"ekqi-b8f3"</span></span>,
@@ -168,7 +177,9 @@ custom_css:
           </span>}</span>,
           "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[<span class="hljs-string">"Transportation"</span>]</span>, 
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]</span>,
+            "<span class="hljs-attribute">contextual_categories</span>": <span class="hljs-value">[<span class="hljs-string">"Things that move"</span>]</span>,
+            "<span class="hljs-attribute">contextual_tags</span>" : <span class="hljs-value">[<span class="hljs-string">"planes"</span>, <span class="hljs-string">"trains"</span>, <span class="hljs-string">"automobiles"</span>]
             </span>}</span>,
           "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span> </span>}</span>,
           "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.seattle.gov/ux/dataset/ekqi-b8f3"</span>
@@ -234,7 +245,7 @@ custom_css:
           </span>}</span>,
         "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{ 
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[ <span class="hljs-string">"Health"</span> ]</span>,
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ] 
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ]
         </span>}</span>,
         "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.medicare.gov"</span> </span>}</span>,
         "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.medicare.gov/view/jct9-bvdr"</span>
@@ -242,15 +253,16 @@ custom_css:
         ]</span>,
     "<span class="hljs-attribute">resultSetSize</span>" : <span class="hljs-value"><span class="hljs-number">11588</span></span>,
     "<span class="hljs-attribute">timings</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">serviceMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span></span>, "<span class="hljs-attribute">searchMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span> </span>}
-</span>}
-</code></pre></li></ul></section><h4 id="-full-text-search">Full text search&nbsp;<a href="#-full-text-search"><i class="fa fa-link"></i></a></h4><p>Full text search will perform a query against all documents in the corpus. Specifically, we will query the fields <code>name, description, category</code> as well as the fields representing <code>column fieldnames, names and description</code>.</p>
-<section id="-full-text-search-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Full text search API</span></div><div style="float:left"><a href="#-full-text-search-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?q}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#1dd92e96fb2113cce87c626b65b255b9" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="1dd92e96fb2113cce87c626b65b255b9" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+</span>}</code></pre></li></ul></section><h4 id="-full-text-search">Full text search&nbsp;<a href="#-full-text-search"><i class="fa fa-link"></i></a></h4><p>Full text search will perform a query against all documents in the corpus. Specifically, we will query the fields <code>name, description, category</code> as well as the fields representing <code>column fieldnames, names and description</code>.</p>
+<section id="-full-text-search-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Full text search API</span></div><div style="float:left"><a href="#-full-text-search-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?q}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>q</dt><dd><code>string</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>chicago crime</span></span><p>A string for full text search</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#328bb050f0cbc93abab13816d0d44abe" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="328bb050f0cbc93abab13816d0d44abe" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>{
       "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
         {
         "<span class="hljs-attribute">resource</span>" :
           <span class="hljs-value">{
             "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span></span>,
-            "<span class="hljs-attribute">description</span>" : <span class="hljs-value"><span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
+            "<span class="hljs-attribute">view_count</span>": <span class="hljs-value"><span class="hljs-number">3456</span>
+            <span class="hljs-string">"description"</span> : <span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
             "<span class="hljs-attribute">updatedAt</span>" : <span class="hljs-value"><span class="hljs-string">"2015-02-19T20:01:56.000Z"</span></span>,
             "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
             "<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-string">"ekqi-b8f3"</span></span>,
@@ -275,7 +287,9 @@ custom_css:
           </span>}</span>,
           "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[<span class="hljs-string">"Transportation"</span>]</span>, 
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]</span>,
+            "<span class="hljs-attribute">contextual_categories</span>": <span class="hljs-value">[<span class="hljs-string">"Things that move"</span>]</span>,
+            "<span class="hljs-attribute">contextual_tags</span>" : <span class="hljs-value">[<span class="hljs-string">"planes"</span>, <span class="hljs-string">"trains"</span>, <span class="hljs-string">"automobiles"</span>]
             </span>}</span>,
           "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span> </span>}</span>,
           "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.seattle.gov/ux/dataset/ekqi-b8f3"</span>
@@ -341,7 +355,7 @@ custom_css:
           </span>}</span>,
         "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{ 
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[ <span class="hljs-string">"Health"</span> ]</span>,
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ] 
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ]
         </span>}</span>,
         "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.medicare.gov"</span> </span>}</span>,
         "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.medicare.gov/view/jct9-bvdr"</span>
@@ -349,15 +363,17 @@ custom_css:
         ]</span>,
     "<span class="hljs-attribute">resultSetSize</span>" : <span class="hljs-value"><span class="hljs-number">11588</span></span>,
     "<span class="hljs-attribute">timings</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">serviceMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span></span>, "<span class="hljs-attribute">searchMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span> </span>}
-</span>}
-</code></pre></li></ul></section><h4 id="-pagination">Pagination&nbsp;<a href="#-pagination"><i class="fa fa-link"></i></a></h4><p>The search service allows pagination of results.  By default, we will return at most 100 results starting from 0.</p>
-<section id="-pagination-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Pagination API</span></div><div style="float:left"><a href="#-pagination-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?offset,limit}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#88fcf42bc0c31e2092d6b077e69e9215" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="88fcf42bc0c31e2092d6b077e69e9215" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+</span>}</code></pre></li></ul></section><h4 id="-pagination">Pagination&nbsp;<a href="#-pagination"><i class="fa fa-link"></i></a></h4><p>The search service allows pagination of results.  By default, we will return at most 100 results starting from 0.</p>
+<section id="-pagination-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Pagination API</span></div><div style="float:left"><a href="#-pagination-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?offset,limit}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>offset</dt><dd><code>number</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>23</span></span><p>Initial starting point for paging (0 by default)</p>
+</dd><dt>limit</dt><dd><code>number</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>47</span></span><p>Number of results to return (100 max/default)</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#8e9b25daa88322c59e1ebca86d03ac3c" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="8e9b25daa88322c59e1ebca86d03ac3c" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>{
       "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
         {
         "<span class="hljs-attribute">resource</span>" :
           <span class="hljs-value">{
             "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span></span>,
-            "<span class="hljs-attribute">description</span>" : <span class="hljs-value"><span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
+            "<span class="hljs-attribute">view_count</span>": <span class="hljs-value"><span class="hljs-number">3456</span>
+            <span class="hljs-string">"description"</span> : <span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
             "<span class="hljs-attribute">updatedAt</span>" : <span class="hljs-value"><span class="hljs-string">"2015-02-19T20:01:56.000Z"</span></span>,
             "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
             "<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-string">"ekqi-b8f3"</span></span>,
@@ -382,7 +398,9 @@ custom_css:
           </span>}</span>,
           "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[<span class="hljs-string">"Transportation"</span>]</span>, 
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]</span>,
+            "<span class="hljs-attribute">contextual_categories</span>": <span class="hljs-value">[<span class="hljs-string">"Things that move"</span>]</span>,
+            "<span class="hljs-attribute">contextual_tags</span>" : <span class="hljs-value">[<span class="hljs-string">"planes"</span>, <span class="hljs-string">"trains"</span>, <span class="hljs-string">"automobiles"</span>]
             </span>}</span>,
           "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span> </span>}</span>,
           "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.seattle.gov/ux/dataset/ekqi-b8f3"</span>
@@ -448,7 +466,7 @@ custom_css:
           </span>}</span>,
         "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{ 
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[ <span class="hljs-string">"Health"</span> ]</span>,
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ] 
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ]
         </span>}</span>,
         "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.medicare.gov"</span> </span>}</span>,
         "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.medicare.gov/view/jct9-bvdr"</span>
@@ -456,15 +474,16 @@ custom_css:
         ]</span>,
     "<span class="hljs-attribute">resultSetSize</span>" : <span class="hljs-value"><span class="hljs-number">11588</span></span>,
     "<span class="hljs-attribute">timings</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">serviceMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span></span>, "<span class="hljs-attribute">searchMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span> </span>}
-</span>}
-</code></pre></li></ul></section><h4 id="-limiting-results-to-specific-resource-types">Limiting results to specific resource types&nbsp;<a href="#-limiting-results-to-specific-resource-types"><i class="fa fa-link"></i></a></h4><p>The search service currently indexes datasets and pages with new resource types to be added in the future.  The caller can restrict the results to a particular type (<code>pages</code>, <code>datasets</code>) by specifying this parameter.</p>
-<section id="-limiting-results-to-specific-resource-types-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Resource search API</span></div><div style="float:left"><a href="#-limiting-results-to-specific-resource-types-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?only}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#f1819ff0dda5dc76419aa713f39965f8" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="f1819ff0dda5dc76419aa713f39965f8" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+</span>}</code></pre></li></ul></section><h4 id="-limiting-results-to-specific-resource-types">Limiting results to specific resource types&nbsp;<a href="#-limiting-results-to-specific-resource-types"><i class="fa fa-link"></i></a></h4><p>The search service currently indexes datasets and pages with new resource types to be added in the future.  The caller can restrict the results to a particular type (<code>pages</code>, <code>datasets</code>) by specifying this parameter.</p>
+<section id="-limiting-results-to-specific-resource-types-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Resource search API</span></div><div style="float:left"><a href="#-limiting-results-to-specific-resource-types-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?only}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>only</dt><dd><code>list[string]</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>pages</span></span><p>Limit results to a particular resource type (<code>pages</code>, <code>datasets</code>). If not present searches all types</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#e8ddd4d023b99e0bf126c8c21fbdfc27" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="e8ddd4d023b99e0bf126c8c21fbdfc27" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>{
       "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
         {
         "<span class="hljs-attribute">resource</span>" :
           <span class="hljs-value">{
             "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span></span>,
-            "<span class="hljs-attribute">description</span>" : <span class="hljs-value"><span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
+            "<span class="hljs-attribute">view_count</span>": <span class="hljs-value"><span class="hljs-number">3456</span>
+            <span class="hljs-string">"description"</span> : <span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
             "<span class="hljs-attribute">updatedAt</span>" : <span class="hljs-value"><span class="hljs-string">"2015-02-19T20:01:56.000Z"</span></span>,
             "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
             "<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-string">"ekqi-b8f3"</span></span>,
@@ -489,7 +508,9 @@ custom_css:
           </span>}</span>,
           "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[<span class="hljs-string">"Transportation"</span>]</span>, 
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]</span>,
+            "<span class="hljs-attribute">contextual_categories</span>": <span class="hljs-value">[<span class="hljs-string">"Things that move"</span>]</span>,
+            "<span class="hljs-attribute">contextual_tags</span>" : <span class="hljs-value">[<span class="hljs-string">"planes"</span>, <span class="hljs-string">"trains"</span>, <span class="hljs-string">"automobiles"</span>]
             </span>}</span>,
           "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span> </span>}</span>,
           "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.seattle.gov/ux/dataset/ekqi-b8f3"</span>
@@ -555,7 +576,7 @@ custom_css:
           </span>}</span>,
         "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{ 
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[ <span class="hljs-string">"Health"</span> ]</span>,
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ] 
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ]
         </span>}</span>,
         "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.medicare.gov"</span> </span>}</span>,
         "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.medicare.gov/view/jct9-bvdr"</span>
@@ -563,15 +584,16 @@ custom_css:
         ]</span>,
     "<span class="hljs-attribute">resultSetSize</span>" : <span class="hljs-value"><span class="hljs-number">11588</span></span>,
     "<span class="hljs-attribute">timings</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">serviceMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span></span>, "<span class="hljs-attribute">searchMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span> </span>}
-</span>}
-</code></pre></li></ul></section><h4 id="-including-additional-render-metadata">Including additional render metadata&nbsp;<a href="#-including-additional-render-metadata"><i class="fa fa-link"></i></a></h4><p>By default (not yet implemented), the search service will only return result data that is useful to a general caller. For the frontend, where additional metadata is stored and may be useful, you can set this flag to true in order to have additional metadata for rendering the dataset or page.</p>
-<section id="-including-additional-render-metadata-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Internal metadata API</span></div><div style="float:left"><a href="#-including-additional-render-metadata-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?include_internal_metadata}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#75a972286208f45d8813fd4182b06825" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="75a972286208f45d8813fd4182b06825" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+</span>}</code></pre></li></ul></section><h4 id="-including-additional-render-metadata">Including additional render metadata&nbsp;<a href="#-including-additional-render-metadata"><i class="fa fa-link"></i></a></h4><p>By default (not yet implemented), the search service will only return result data that is useful to a general caller. For the frontend, where additional metadata is stored and may be useful, you can set this flag to true in order to have additional metadata for rendering the dataset or page.</p>
+<section id="-including-additional-render-metadata-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Internal metadata API</span></div><div style="float:left"><a href="#-including-additional-render-metadata-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?include_internal_metadata}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>include_internal_metadata</dt><dd><code>boolean</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>Results return with additional rendering metadata useful to frontend. If not present, assumed false</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#ab2b5a2bff520853f224185591fd0e94" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="ab2b5a2bff520853f224185591fd0e94" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>{
       "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
         {
         "<span class="hljs-attribute">resource</span>" :
           <span class="hljs-value">{
             "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span></span>,
-            "<span class="hljs-attribute">description</span>" : <span class="hljs-value"><span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
+            "<span class="hljs-attribute">view_count</span>": <span class="hljs-value"><span class="hljs-number">3456</span>
+            <span class="hljs-string">"description"</span> : <span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
             "<span class="hljs-attribute">updatedAt</span>" : <span class="hljs-value"><span class="hljs-string">"2015-02-19T20:01:56.000Z"</span></span>,
             "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
             "<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-string">"ekqi-b8f3"</span></span>,
@@ -596,7 +618,9 @@ custom_css:
           </span>}</span>,
           "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[<span class="hljs-string">"Transportation"</span>]</span>, 
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]</span>,
+            "<span class="hljs-attribute">contextual_categories</span>": <span class="hljs-value">[<span class="hljs-string">"Things that move"</span>]</span>,
+            "<span class="hljs-attribute">contextual_tags</span>" : <span class="hljs-value">[<span class="hljs-string">"planes"</span>, <span class="hljs-string">"trains"</span>, <span class="hljs-string">"automobiles"</span>]
             </span>}</span>,
           "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span> </span>}</span>,
           "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.seattle.gov/ux/dataset/ekqi-b8f3"</span>
@@ -662,7 +686,7 @@ custom_css:
           </span>}</span>,
         "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{ 
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[ <span class="hljs-string">"Health"</span> ]</span>,
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ] 
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ]
         </span>}</span>,
         "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.medicare.gov"</span> </span>}</span>,
         "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.medicare.gov/view/jct9-bvdr"</span>
@@ -670,15 +694,25 @@ custom_css:
         ]</span>,
     "<span class="hljs-attribute">resultSetSize</span>" : <span class="hljs-value"><span class="hljs-number">11588</span></span>,
     "<span class="hljs-attribute">timings</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">serviceMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span></span>, "<span class="hljs-attribute">searchMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span> </span>}
-</span>}
-</code></pre></li></ul></section><h4 id="-complete-search-api">Complete Search API&nbsp;<a href="#-complete-search-api"><i class="fa fa-link"></i></a></h4><p>The full search API is detailed here, with some additional options such as <code>tags</code> and <code>highlight</code> which are not yet implemented.</p>
-<section id="-complete-search-api-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Search API with all options</span></div><div style="float:left"><a href="#-complete-search-api-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?domains,categories,tags,q,offset,limit,only,include_internal_metadata,highlight}</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#4f16c7e3e6798724f4f0d5ef08c96dc2" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="4f16c7e3e6798724f4f0d5ef08c96dc2" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">undefined</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>    {
+</span>}</code></pre></li></ul></section><h4 id="-complete-search-api">Complete Search API&nbsp;<a href="#-complete-search-api"><i class="fa fa-link"></i></a></h4><p>The full search API is detailed here, with some additional options such as <code>tags</code> and <code>highlight</code> which are not yet implemented.</p>
+<section id="-complete-search-api-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Search API with all options</span></div><div style="float:left"><a href="#-complete-search-api-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1{?domains,search_context,categories,tags,q,offset,limit,only,include_internal_metadata,highlight}</code></div></div><ul class="list-group"><li class="list-group-item bg-default"><strong>Parameters</strong></li><li class="list-group-item"><dl class="dl-horizontal"><dt>domains</dt><dd><code>list[string]</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>cname1,cname2</span></span><p>A comma separated list of cnames. Returns results restricted to only the domains in the list. When not present, searches the entire catalog.</p>
+</dd><dt>search_context</dt><dd><code>string</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>data.seattle.gov</span></span><p>Specifies the domain from where this query was issues and for which categories will be used in search.</p>
+</dd><dt>categories</dt><dd><code>list[string]</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>category1,category2</span></span><p>A comma separated list of categories. Return results restricted to only the categories specified (OR). When not present, searches all categories.</p>
+</dd><dt>tags</dt><dd><code>list[string]</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>tag1,tag2</span></span><p>A comma separated list of tags. Return results restricted to only the tags specified (OR). When not present, searches all tags.</p>
+</dd><dt>q</dt><dd><code>string</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>potholes</span></span><p>A string for full text search</p>
+</dd><dt>offset</dt><dd><code>number</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>23</span></span><p>Initial starting point for paging (0 by default)</p>
+</dd><dt>limit</dt><dd><code>number</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>1000</span></span><p>Number of results to return (100 default/max)</p>
+</dd><dt>only</dt><dd><code>list[string]</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>pages</span></span><p>Limit results to a particular resource type (<code>pages</code>, <code>datasets</code>). If not present searches all types</p>
+</dd><dt>include_internal_metadata</dt><dd><code>boolean</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>Results return with additional rendering metadata useful to frontend. If not present, assumed false</p>
+</dd><dt>highlight</dt><dd><code>boolean</code>&nbsp;<span>(optional)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>true</span></span><p>Include highlighting information</p>
+</dd></dl></li></ul><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#6a610776e5b5e26be6d405463fb27ad2" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="6a610776e5b5e26be6d405463fb27ad2" class="list-group-item panel-collapse collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br/></code></pre><h5>Body</h5><pre><code>{
       "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
         {
         "<span class="hljs-attribute">resource</span>" :
           <span class="hljs-value">{
             "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span></span>,
-            "<span class="hljs-attribute">description</span>" : <span class="hljs-value"><span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
+            "<span class="hljs-attribute">view_count</span>": <span class="hljs-value"><span class="hljs-number">3456</span>
+            <span class="hljs-string">"description"</span> : <span class="hljs-string">"These sensors counts both people riding bikes and pedestrians. Separate volumes are tallied for each travel mode. Wires in a diamond formation in the concrete detect bikes and an infrared sensor mounted on a wooden post detects pedestrians. The counters also capture the direction of travel for both bikes and pedestrians."</span></span>,
             "<span class="hljs-attribute">updatedAt</span>" : <span class="hljs-value"><span class="hljs-string">"2015-02-19T20:01:56.000Z"</span></span>,
             "<span class="hljs-attribute">type</span>" : <span class="hljs-value"><span class="hljs-string">"dataset"</span></span>,
             "<span class="hljs-attribute">id</span>" : <span class="hljs-value"><span class="hljs-string">"ekqi-b8f3"</span></span>,
@@ -703,7 +737,9 @@ custom_css:
           </span>}</span>,
           "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[<span class="hljs-string">"Transportation"</span>]</span>, 
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[<span class="hljs-string">"transportation"</span>]</span>,
+            "<span class="hljs-attribute">contextual_categories</span>": <span class="hljs-value">[<span class="hljs-string">"Things that move"</span>]</span>,
+            "<span class="hljs-attribute">contextual_tags</span>" : <span class="hljs-value">[<span class="hljs-string">"planes"</span>, <span class="hljs-string">"trains"</span>, <span class="hljs-string">"automobiles"</span>]
             </span>}</span>,
           "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span> </span>}</span>,
           "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.seattle.gov/ux/dataset/ekqi-b8f3"</span>
@@ -769,7 +805,7 @@ custom_css:
           </span>}</span>,
         "<span class="hljs-attribute">classification</span>" : <span class="hljs-value">{ 
             "<span class="hljs-attribute">categories</span>" : <span class="hljs-value">[ <span class="hljs-string">"Health"</span> ]</span>,
-            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ] 
+            "<span class="hljs-attribute">tags</span>" : <span class="hljs-value">[ <span class="hljs-string">"health"</span> ]
         </span>}</span>,
         "<span class="hljs-attribute">metadata</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.medicare.gov"</span> </span>}</span>,
         "<span class="hljs-attribute">link</span>" : <span class="hljs-value"><span class="hljs-string">"https://data.medicare.gov/view/jct9-bvdr"</span>
@@ -777,128 +813,433 @@ custom_css:
         ]</span>,
     "<span class="hljs-attribute">resultSetSize</span>" : <span class="hljs-value"><span class="hljs-number">11588</span></span>,
     "<span class="hljs-attribute">timings</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">serviceMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span></span>, "<span class="hljs-attribute">searchMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span> </span>}
-</span>}
-</code></pre></li></ul></section><h4 id="-listing-domains">Listing Domains&nbsp;<a href="#-listing-domains"><i class="fa fa-link"></i></a></h4><p>The search service has the ability to return information regarding the domains in its index. 
+</span>}</code></pre></li></ul></section><h4 id="-listing-domains">Listing Domains&nbsp;<a href="#-listing-domains"><i class="fa fa-link"></i></a></h4><p>The search service has the ability to return information regarding the domains in its index.
 The complete set of query parameters is available to this endpoint as described in the above section.</p>
-<section id="-listing-domains-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Return all domains</span></div><div style="float:left"><a href="#-listing-domains-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1/domains</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#02cdcb7fe835a58ee1022929de259c08" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="02cdcb7fe835a58ee1022929de259c08" class="list-group-item panel-collapse collapse"><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">results</span>" :
-    <span class="hljs-value">[
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"opendata.utah.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">1239</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.cityofnewyork.us"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">956</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.illinois.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">491</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.oregon.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">466</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.hawaii.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">454</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.ok.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">423</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.maryland.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">399</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.ny.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">391</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"www.opendata.go.ke"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">341</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.cityofchicago.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">334</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"datacatalog.cookcountyil.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">308</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"bronx.lehman.cuny.edu"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">245</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.colorado.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">238</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.edmonton.ca"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">238</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.lacity.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">232</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.mo.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">219</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"www.natsdatasct.gob.mx"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">211</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"health.data.ny.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">208</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.ct.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">204</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.cdc.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">190</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"finances.worldbank.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">188</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.medicare.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">186</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.wa.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">170</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.baltimorecity.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">167</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.sfgov.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">165</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.raleighnc.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">139</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">124</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.cityofboston.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">123</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.iowa.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">119</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"bythenumbers.sco.ca.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">116</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.oaklandnet.com"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">114</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.smcgov.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">114</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.kcmo.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">111</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"chronicdata.cdc.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">98</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.cms.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">95</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.kingcounty.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">90</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.nola.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">88</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"healthdata.nj.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">88</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"www.datossct.gob.mx"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">87</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.nj.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">76</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.iae.alberta.ca"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">74</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.michigan.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">69</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.energystar.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">68</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.acgov.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">61</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.montgomerycountymd.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">59</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"opendata.lasvegasnevada.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">58</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"cdph.data.ca.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">57</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.cambridgema.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">56</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.melbourne.vic.gov.au"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">51</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"controllerdata.lacity.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">48</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.austintexas.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">46</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.chattlibrary.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">45</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.brla.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">44</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.winnipeg.ca"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">43</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"chhs.data.ca.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">41</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.cityofberkeley.info"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">40</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.hartford.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">35</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.cityofgainesville.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">34</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.datamontana.us"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">34</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.mass.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">30</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.awcnet.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">27</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.dcpcsb.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">25</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.providenceri.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">25</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.strathcona.ca"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">25</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"databox.worldbank.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">24</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"www.dallasopendata.com"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">24</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.smgov.net"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">22</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.montgomeryschoolsmd.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">21</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.tol.ca"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">20</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.texas.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">19</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"openpaymentsdata.cms.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">19</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.nashville.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">16</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.princegeorgescountymd.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">16</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.vermont.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">14</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.murphytx.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">12</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.cityofgp.com"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">11</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.fortworthtexas.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">9</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.hampton.gov"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">5</span> </span>},
-      { "<span class="hljs-attribute">domain</span>" : <span class="hljs-value"><span class="hljs-string">"data.vta.org"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">2</span> </span>}
-    ]</span>,
-  "<span class="hljs-attribute">timings</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">serviceMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span></span>, "<span class="hljs-attribute">searchMillis</span>" : <span class="hljs-value"><span class="hljs-number">4</span> </span>}
-</span>}
-</code></pre></li></ul></section><h4 id="-searching-for-tags">Searching for tags&nbsp;<a href="#-searching-for-tags"><i class="fa fa-link"></i></a></h4><p>Returns aggregate tag statistics as well as a list of tags. The compelte set of query functionality is available to this endpoint.</p>
-<section id="-searching-for-tags-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Return tags</span></div><div style="float:left"><a href="#-searching-for-tags-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1/tags</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#10efc7b5daa4e13ede176e30a10adad6" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="10efc7b5daa4e13ede176e30a10adad6" class="list-group-item panel-collapse collapse"><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">results</span>" :
-    <span class="hljs-value">[
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"health"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">1401</span> </span>},
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"transportation"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">1051</span> </span>},
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"politics"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">979</span> </span>},
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"finance"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">917</span> </span>},
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"business"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">877</span> </span>},
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"homeless"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">739</span> </span>},
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"environment"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">587</span> </span>},
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"crime"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">567</span> </span>},
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"education"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">467</span> </span>},
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"construction"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">390</span> </span>},
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"library"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">171</span> </span>},
-      { "<span class="hljs-attribute">tag</span>" : <span class="hljs-value"><span class="hljs-string">"infrastructure"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">120</span> </span>}
-    ]</span>,
-  "<span class="hljs-attribute">timings</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">serviceMillis</span>" : <span class="hljs-value"><span class="hljs-number">4</span></span>, "<span class="hljs-attribute">searchMillis</span>" : <span class="hljs-value"><span class="hljs-number">4</span> </span>}
-</span>}
-</code></pre></li></ul></section><h4 id="-searching-for-categories">Searching for categories&nbsp;<a href="#-searching-for-categories"><i class="fa fa-link"></i></a></h4><p>Returns aggregate category statistics as well as a list of categories.  Complete search functionality is available at this endpoint.</p>
-<section id="-searching-for-categories-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Return categories</span></div><div style="float:left"><a href="#-searching-for-categories-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1/categories</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#fce0e97e8c46a913462e4a46c87e6396" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="fce0e97e8c46a913462e4a46c87e6396" class="list-group-item panel-collapse collapse"><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">results</span>" :
-    <span class="hljs-value">[
-      { "<span class="hljs-attribute">category</span>" : <span class="hljs-value"><span class="hljs-string">"Health"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">1401</span> </span>},
-      { "<span class="hljs-attribute">category</span>" : <span class="hljs-value"><span class="hljs-string">"Transportation"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">1051</span> </span>},
-      { "<span class="hljs-attribute">category</span>" : <span class="hljs-value"><span class="hljs-string">"Finance"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">917</span> </span>},
-      { "<span class="hljs-attribute">category</span>" : <span class="hljs-value"><span class="hljs-string">"Social Services"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">739</span> </span>},
-      { "<span class="hljs-attribute">category</span>" : <span class="hljs-value"><span class="hljs-string">"Environment"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">587</span> </span>},
-      { "<span class="hljs-attribute">category</span>" : <span class="hljs-value"><span class="hljs-string">"Public Safety"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">567</span> </span>},
-      { "<span class="hljs-attribute">category</span>" : <span class="hljs-value"><span class="hljs-string">"Education"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">467</span> </span>},
-      { "<span class="hljs-attribute">category</span>" : <span class="hljs-value"><span class="hljs-string">"Housing &amp; Development"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">390</span> </span>},
-      { "<span class="hljs-attribute">category</span>" : <span class="hljs-value"><span class="hljs-string">"Infrastructure"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">390</span> </span>},
-      { "<span class="hljs-attribute">category</span>" : <span class="hljs-value"><span class="hljs-string">"Recreation"</span></span>, "<span class="hljs-attribute">count</span>" : <span class="hljs-value"><span class="hljs-number">171</span> </span>}
-    ]</span>,
-  "<span class="hljs-attribute">timings</span>" : <span class="hljs-value">{ "<span class="hljs-attribute">serviceMillis</span>" : <span class="hljs-value"><span class="hljs-number">5</span></span>, "<span class="hljs-attribute">searchMillis</span>" : <span class="hljs-value"><span class="hljs-number">4</span> </span>}
-</span>}
-</code></pre></li></ul></section></div></div></div></div><!-- block scripts--><!--     script--><!--         :coffee--><!--             $('table').addClass 'table'--><!--     if livePreview--><!--         script--><!--             :coffee--><!--                 socket = io()--><!--                 socket.on "refresh", (msg) ->--><!--                     $(document.body).html(msg)--></div></div>
+<section id="-listing-domains-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Return all domains</span></div><div style="float:left"><a href="#-listing-domains-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1/domains</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#37a8688629f2d73110341c292990c3b6" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="37a8688629f2d73110341c292990c3b6" class="list-group-item panel-collapse collapse"><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"opendata.utah.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">1239</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.cityofnewyork.us"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">956</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.illinois.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">491</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.oregon.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">466</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.hawaii.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">454</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.ok.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">423</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.maryland.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">399</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.ny.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">391</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"www.opendata.go.ke"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">341</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.cityofchicago.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">334</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"datacatalog.cookcountyil.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">308</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"bronx.lehman.cuny.edu"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">245</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.colorado.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">238</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.edmonton.ca"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">238</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.lacity.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">232</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.mo.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">219</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"www.natsdatasct.gob.mx"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">211</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"health.data.ny.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">208</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.ct.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">204</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.cdc.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">190</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"finances.worldbank.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">188</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.medicare.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">186</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.wa.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">170</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.baltimorecity.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">167</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.sfgov.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">165</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.raleighnc.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">139</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.seattle.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">124</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.cityofboston.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">123</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.iowa.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">119</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"bythenumbers.sco.ca.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">116</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.oaklandnet.com"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">114</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.smcgov.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">114</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.kcmo.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">111</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"chronicdata.cdc.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">98</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.cms.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">95</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.kingcounty.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">90</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.nola.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">88</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"healthdata.nj.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">88</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"www.datossct.gob.mx"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">87</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.nj.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">76</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.iae.alberta.ca"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">74</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.michigan.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">69</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.energystar.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">68</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.acgov.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">61</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.montgomerycountymd.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">59</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"opendata.lasvegasnevada.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">58</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"cdph.data.ca.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">57</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.cambridgema.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">56</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.melbourne.vic.gov.au"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">51</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"controllerdata.lacity.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">48</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.austintexas.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">46</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.chattlibrary.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">45</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.brla.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">44</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.winnipeg.ca"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">43</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"chhs.data.ca.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">41</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.cityofberkeley.info"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">40</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.hartford.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">35</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.cityofgainesville.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">34</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.datamontana.us"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">34</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.mass.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">30</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.awcnet.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">27</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.dcpcsb.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">25</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.providenceri.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">25</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.strathcona.ca"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">25</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"databox.worldbank.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">24</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"www.dallasopendata.com"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">24</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.smgov.net"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">22</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.montgomeryschoolsmd.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">21</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.tol.ca"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">20</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.texas.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">19</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"openpaymentsdata.cms.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">19</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.nashville.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">16</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.princegeorgescountymd.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">16</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.vermont.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">14</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.murphytx.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">12</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.cityofgp.com"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">11</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.fortworthtexas.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">9</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.hampton.gov"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">5</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">domain</span>": <span class="hljs-value"><span class="hljs-string">"data.vta.org"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">2</span>
+    </span>}
+  ]</span>,
+  "<span class="hljs-attribute">timings</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">serviceMillis</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+    "<span class="hljs-attribute">searchMillis</span>": <span class="hljs-value"><span class="hljs-number">4</span>
+  </span>}
+</span>}</code></pre></li></ul></section><h4 id="-searching-for-tags">Searching for tags&nbsp;<a href="#-searching-for-tags"><i class="fa fa-link"></i></a></h4><p>Returns aggregate tag statistics as well as a list of tags. The compelte set of query functionality is available to this endpoint.</p>
+<section id="-searching-for-tags-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Return tags</span></div><div style="float:left"><a href="#-searching-for-tags-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1/tags</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#06fe94f9454a7037846de3723449cdcc" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="06fe94f9454a7037846de3723449cdcc" class="list-group-item panel-collapse collapse"><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"health"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">1401</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"transportation"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">1051</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"politics"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">979</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"finance"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">917</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"business"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">877</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"homeless"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">739</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"environment"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">587</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"crime"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">567</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"education"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">467</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"construction"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">390</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"library"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">171</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">tag</span>": <span class="hljs-value"><span class="hljs-string">"infrastructure"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">120</span>
+    </span>}
+  ]</span>,
+  "<span class="hljs-attribute">timings</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">serviceMillis</span>": <span class="hljs-value"><span class="hljs-number">4</span></span>,
+    "<span class="hljs-attribute">searchMillis</span>": <span class="hljs-value"><span class="hljs-number">4</span>
+  </span>}
+</span>}</code></pre></li></ul></section><h4 id="-searching-for-categories">Searching for categories&nbsp;<a href="#-searching-for-categories"><i class="fa fa-link"></i></a></h4><p>Returns aggregate category statistics as well as a list of categories.  Complete search functionality is available at this endpoint.</p>
+<section id="-searching-for-categories-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Return categories</span></div><div style="float:left"><a href="#-searching-for-categories-get" class="btn btn-xs btn-info">GET</a></div><div style="overflow:hidden"><code>/catalog/v1/categories</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#a71b63dae74e432aee85d0b0ce97c8f9" class="pull-right collapsed"><span class="closed">Show</span><span class="open">Hide</span></a></li><li id="a71b63dae74e432aee85d0b0ce97c8f9" class="list-group-item panel-collapse collapse"><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">results</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">category</span>": <span class="hljs-value"><span class="hljs-string">"Health"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">1401</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">category</span>": <span class="hljs-value"><span class="hljs-string">"Transportation"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">1051</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">category</span>": <span class="hljs-value"><span class="hljs-string">"Finance"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">917</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">category</span>": <span class="hljs-value"><span class="hljs-string">"Social Services"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">739</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">category</span>": <span class="hljs-value"><span class="hljs-string">"Environment"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">587</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">category</span>": <span class="hljs-value"><span class="hljs-string">"Public Safety"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">567</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">category</span>": <span class="hljs-value"><span class="hljs-string">"Education"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">467</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">category</span>": <span class="hljs-value"><span class="hljs-string">"Housing &amp; Development"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">390</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">category</span>": <span class="hljs-value"><span class="hljs-string">"Infrastructure"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">390</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">category</span>": <span class="hljs-value"><span class="hljs-string">"Recreation"</span></span>,
+      "<span class="hljs-attribute">count</span>": <span class="hljs-value"><span class="hljs-number">171</span>
+    </span>}
+  ]</span>,
+  "<span class="hljs-attribute">timings</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">serviceMillis</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+    "<span class="hljs-attribute">searchMillis</span>": <span class="hljs-value"><span class="hljs-number">4</span>
+  </span>}
+</span>}</code></pre></li></ul></section></div></div></div></div><!-- block scripts--><!--     script--><!--         :coffee--><!--             $('table').addClass 'table'--><!--     if livePreview--><!--         script--><!--             :coffee--><!--                 socket = io()--><!--                 socket.on "refresh", (msg) ->--><!--                     $(document.body).html(msg)--></div></div>
