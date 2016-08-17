@@ -6,6 +6,7 @@ ga_tracking_code: "UA-9046230-6"
 subsite: labs
 subsite_name: Socrata Labs
 github_repo: https://github.com/socrata/labs.socrata.com
+contribute: https://github.com/socrata/labs.socrata.com
 
 title: Socrata Labs
 icon: fa fa-flask
